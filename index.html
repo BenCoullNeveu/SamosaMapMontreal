@@ -38,12 +38,43 @@
   </style>
 </head>
 <body>
+
+  <div id="map-info" style="
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+">
+  Lat: ---, Lng: --- | Zoom: --
+</div>
+
+
   <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="samosas.js"></script>
   <script>
     const map = L.map("map").setView([45.5017, -73.5673], 12);
+
+    const mapInfo = document.getElementById("map-info");
+
+    function updateMapInfo() {
+      const center = map.getCenter();
+      const zoom = map.getZoom();
+      mapInfo.textContent = `Lat: ${center.lat.toFixed(5)}, Lng: ${center.lng.toFixed(5)} | Zoom: ${zoom}`;
+    }
+
+    // Update on map load and move
+    map.on("move", updateMapInfo);
+    map.on("zoom", updateMapInfo);
+    updateMapInfo(); // initial update
+
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
