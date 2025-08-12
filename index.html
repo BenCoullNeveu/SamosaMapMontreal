@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Montreal Samosa Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    #map { height: 100vh; }
+    .popup-content { font-size: 14px; }
+    .popup-title { font-weight: bold; margin-bottom: 4px; }
+    .popup-button {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 5px 10px;
+      background-color: #ff9800;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .popup-button:hover {
+      background-color: #e68900;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  // Initialize the map centered on Montreal
+  const map = L.map('map').setView([45.5017, -73.5673], 12);
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  // Samosa locations
+  const samosaPlaces = [
+    {
+      name: "Bombay Mahal",
+      lat: 45.5351,
+      lng: -73.6132,
+      description: "Classic Indian eatery with tasty and affordable samosas.",
+      rating: 4.5,
+      cost: "$",
+      mapsLink: "https://www.google.com/maps/dir/?api=1&destination=Bombay+Mahal,+Montreal"
+    },
+    {
+      name: "Pushap Restaurant",
+      lat: 45.5146,
+      lng: -73.6530,
+      description: "Vegetarian Indian restaurant with amazing samosas.",
+      rating: 4.4,
+      cost: "$",
+      mapsLink: "https://www.google.com/maps/dir/?api=1&destination=Pushap+Restaurant,+Montreal"
+    },
+    {
+      name: "Le Taj",
+      lat: 45.5049,
+      lng: -73.5736,
+      description: "Upscale Indian dining with gourmet samosas.",
+      rating: 4.3,
+      cost: "$$$",
+      mapsLink: "https://www.google.com/maps/dir/?api=1&destination=Le+Taj,+Montreal"
+    }
+  ];
+
+  // Add markers
+  samosaPlaces.forEach(place => {
+    const popupHTML = `
+      <div class="popup-content">
+        <div class="popup-title">${place.name}</div>
+        <div>${place.description}</div>
+        <div>⭐ Rating: ${place.rating}</div>
+        <div>💲 Cost: ${place.cost}</div>
+        <a class="popup-button" href="${place.mapsLink}" target="_blank">Get Directions</a>
+      </div>
+    `;
+    L.marker([place.lat, place.lng])
+      .addTo(map)
+      .bindPopup(popupHTML);
+  });
+</script>
+
+</body>
+</html>
