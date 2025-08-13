@@ -21,6 +21,7 @@
     }
     .popup-title {
       font-weight: bold;
+      font-size: 16px;
       margin-bottom: 4px;
     }
     .popup-button {
@@ -60,8 +61,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="samosas.js"></script>
   <script>
-    const map = L.map("map").setView([45.496, -73.626], 12);
-
+    const map = L.map("map").setView([45.4877, -73.6113], 13);
     const mapInfo = document.getElementById("map-info");
 
     function updateMapInfo() {
@@ -86,9 +86,10 @@
         <div class="popup-content">
           <div class="popup-title">${place.name}</div>
           <div>${place.description}</div>
-          <div>⭐ Rating: ${place.rating}</div>
-          <div>💲 Cost: ${place.cost}</div>
-          <a class="popup-button" href="${place.mapsLink}" target="_blank">Get Directions</a>
+          <div style="margin-top: 5px;">⭐ Rating: ${place.rating}</div>
+          <div style="margin-top: 5px;">💲 Cost: ${place.cost}</div>
+          <div style="margin-top: 5px;">🕒 Hours: ${place.hours}</div>
+          <a class="popup-button" href="${place.mapsLink}" target="_blank" style="color: white;">Get Directions</a>
         </div>
       `;
       L.marker([place.lat, place.lng]).addTo(map).bindPopup(popupHTML);

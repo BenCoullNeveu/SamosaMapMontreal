@@ -30,10 +30,10 @@ const samosas = [
     mapsLink: "https://www.google.com/maps/dir/?api=1&destination=45.5123,-73.5672"
   },
   {
-    name: "MUHC Glen site Samosas (find cafe name)",
+    name: "MUHC Glen site Samosas\n(find cafe name)",
     lat: 45.474, 
     lng: -73.601,
-    description: "Decent samosas available at the MUHC Glen site. Chutney is not great, but the samosas are good. Sold in a set of 2 samosas per order. \nEasiest to get to from the metro tunnel connecting the hospital to Vendome metro. The cafe is located on the first floor (up a flight of stairs from the metro entrance).",
+    description: "Decent samosas available at the MUHC Glen site. Chutney is not great, but the samosas are good. Sold in a set of 2 samosas per order.\n\nEasiest to get to from the metro tunnel connecting the hospital to Vendome metro.\n\nThe cafe is located on the first floor (up a flight of stairs from the metro entrance).",
     rating: 3.0,
     cost: "$1.55 / samosa",
     mapsLink: "https://www.google.com/maps/dir/?api=1&destination=45.474,-73.601"
