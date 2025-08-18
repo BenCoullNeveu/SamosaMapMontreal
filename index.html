@@ -64,6 +64,31 @@
     const map = L.map("map").setView([45.4877, -73.6113], 13);
     const mapInfo = document.getElementById("map-info");
 
+    function createRatingBar(label, value, max = 5) {
+        const percentage = (value / max) * 100;
+
+        return `
+            <div style="margin: 4px 0;">
+                <strong>${label}:</strong>
+                <div style="position: relative; height: 20px; margin-top: 2px;">
+                    <!-- Background bar -->
+                    <div style="position: absolute; top: 50%; left: 0; right: 0; height: 6px; 
+                                background: #ddd; transform: translateY(-50%); border-radius: 3px;"></div>
+
+                    <!-- Pointer -->
+                    <div style="position: absolute; top: 50%; left: ${percentage}%; 
+                                transform: translate(-50%, -50%) rotate(0deg); 
+                                width: 0; height: 0; 
+                                border-left: 6px solid transparent; 
+                                border-right: 6px solid transparent; 
+                                border-bottom: 10px solid red;"></div>
+                </div>
+                <div style="font-size: 12px; text-align: right;">${value} / ${max}</div>
+            </div>
+        `;
+    }
+
+
     function updateMapInfo() {
       const center = map.getCenter();
       const zoom = map.getZoom();
@@ -81,18 +106,24 @@
       attribution: "© OpenStreetMap",
     }).addTo(map);
 
-    samosas.forEach((place) => {
+    samosas.forEach((samosa) => {
       const popupHTML = `
         <div class="popup-content">
-          <div class="popup-title">${place.name}</div>
-          <div>${place.description}</div>
-          <div style="margin-top: 5px;">⭐ Rating: ${place.rating}</div>
-          <div style="margin-top: 5px;">💲 Cost: ${place.cost}</div>
-          <div style="margin-top: 5px;">🕒 Hours: ${place.hours}</div>
-          <a class="popup-button" href="${place.mapsLink}" target="_blank" style="color: white;">Get Directions</a>
+          <div class="popup-title">${samosa.name}</div>
+          <div>${samosa.description}</div>
+          <div style="margin-top: 5px;">⭐ Rating: ${samosa.rating}</div>
+          <div style="margin-top: 5px;">💲 Cost: ${samosa.cost}</div>
+          <div style="margin-top: 5px;">🕒 Hours: ${samosa.hours}</div>
+          ${createRatingBar("Crust Hardness", samosa.crustHardness)}
+          ${createRatingBar("Filling Flavour", samosa.fillingFlavour)}
+          ${createRatingBar("Chutney Complement", samosa.chutneyComplement)}
+          <a class="popup-button" href="${samosa.mapsLink}" target="_blank" style="color: white; display: inline-block; margin-top: 8px;">Get Directions</a>
         </div>
       `;
-      L.marker([place.lat, place.lng]).addTo(map).bindPopup(popupHTML);
+
+      L.marker([samosa.lat, samosa.lng])
+        .addTo(map)
+        .bindPopup(popupHTML);
     });
   </script>
 </body>
