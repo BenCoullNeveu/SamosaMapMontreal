@@ -111,13 +111,13 @@
         <div class="popup-content">
           <div class="popup-title">${samosa.name}</div>
           <div>${samosa.description}</div>
-          <div style="margin-top: 7px;">⭐ Rating: ${samosa.rating}</div>
           <div style="margin-top: 7px;">💲 Cost: ${samosa.cost}</div>
-          <div style="margin-top: 7px;">🕒 Hours: ${samosa.hours}</div>
+          <div style="margin-top: 7px;">⭐ Rating: ${samosa.rating}</div>
           <div style="margin-top: 10px;"></div>  <!-- add empty space -->
-          ${createRatingBar("Crust Hardness", samosa.crustHardness)}
-          ${createRatingBar("Filling Flavour", samosa.fillingFlavour)}
-          ${createRatingBar("Chutney Complement", samosa.chutneyComplement)}
+          ${createRatingBar("Crust", samosa.crustQuality)}
+          ${createRatingBar("Filling", samosa.fillingQuality)}
+          ${createRatingBar("Chutney", samosa.chutneyQuality)}
+          <div style="margin-top: 7px;">🕒 Hours: ${samosa.hours}</div>
           <a class="popup-button" href="${samosa.mapsLink}" target="_blank" style="color: white; display: inline-block; margin-top: 8px;">Get Directions</a>
         </div>
       `;
